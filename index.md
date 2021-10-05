@@ -3,11 +3,6 @@ styles:
     - href: "./main.css"
 ---
 
-<script>
-    if(!location.hash || location.hash.length <= 2){
-        location.hash = "#acceuil";
-    }
-</script>
 
 <section class="parkour" id="acceuil">
     <section class="explications">
@@ -62,3 +57,10 @@ styles:
         <p>... Ptèt un texte ici ...</p>
     </section>
 </section>
+
+
+<script>
+    if(!location.hash || location.hash.length <= 2){
+        location.hash = "#acceuil";
+    }
+</script>
