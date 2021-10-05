@@ -1,5 +1,5 @@
 {
-  "name": "front-end-template",
+  "name": "jr-parkour",
   "version": "1.0.0",
   "scripts": {
     "build": "rollup -c",

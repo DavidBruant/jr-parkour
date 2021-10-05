@@ -1,0 +1,63 @@
+$header-height: 6rem;
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    height: $header-height;
+    padding: 1rem;
+
+    img{
+        flex: 1;
+        height: 100%;
+    }
+
+    nav{
+        flex: 7;
+        
+        & > ul {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+
+
+            & > li {
+                text-align: center;
+
+                a {
+                    padding: 0.5rem 1rem;
+                    color: black;
+
+                    &::after {
+                        content: "";
+                    }
+                }
+
+
+                & > ul {
+                    display: none;
+                    
+                }
+            }
+        }
+    }
+}
+
+.fa-caret-down::before {
+    content: "▼";
+}
+
+main {
+    background-color: #ffffff;
+    background-image: url("http://www.justicerestaurative.org/wp-content/uploads/2019/03/adult-casual-clothes-296881.jpg");
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    min-height: calc(100vh - #{$header-height});
+
+    padding-top: 2rem;
+}
