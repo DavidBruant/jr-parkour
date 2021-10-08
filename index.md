@@ -61,6 +61,6 @@ styles:
 
 <script>
     if(!location.hash || location.hash.length <= 2){
-        location.hash = "#acceuil";
+        location.replace("#acceuil");
     }
 </script>
