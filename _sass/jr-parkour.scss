@@ -54,4 +54,45 @@ section.parkour {
             }
         }
     }
+
+    &#commencer-démarche{
+        input{
+            font-size: 1.2rem;
+            margin-left: 2rem;
+            margin-bottom: 3rem;
+
+        }
+
+        output{
+            display: flex;
+            flex-direction: column;
+
+            .contact{
+                background-color:rgba(255, 255, 255, 0.9);
+                padding: 1rem;
+                margin-bottom: 2rem;
+
+                .person-name{
+                    font-size: 1.3rem;
+
+                    &::before{
+                        content: '🧘';
+                        font-size: 1rem;
+                        margin-right: 0.5rem;
+                    }
+                }
+
+                .structure{
+                    font-size: 1.1rem;
+                    font-weight: normal;
+
+                    &::before{
+                        content: '🏘️';
+                        font-size: 1rem;
+                        margin-right: 0.5rem;
+                    }
+                }
+            }
+        }
+    }
 }

@@ -18,7 +18,7 @@ styles:
             <img src="https://parcours-victimes.fr/wp-content/uploads/2020/09/adultes.png">
         </a>
         <a href="#contacté-démarche">  
-            <p>J'ai été contacté pour participer à une démarche de justice restaurative</p>
+            <p>J'ai été contacté.e pour participer à une démarche de justice restaurative</p>
             <img src="https://parcours-victimes.fr/wp-content/uploads/2020/09/adultes.png">
         </a>
         <a href="#pro">  
@@ -35,11 +35,61 @@ styles:
     </section>
     <section>
         <p>
-            Pour savoir vers qui vous tourner, vous pouvez saisir ici votre commune ou votre département. 
+            Pour savoir vers qui vous tourner, vous pouvez saisir ici votre commune. 
             Nous vous donnerons les coordonnées de la personne la plus pertinente pour vous renseigner dans votre zone géographique
         </p>
-        <input type="search">
-        <output></output>
+        <input type="search" placeholder="Pau">
+        <output>
+            <h1>Tous les contacts</h1>
+            <section class="contact">
+                <h1 class="person-name">Dav Bru</h1>
+                <h2 class="structure">L'Échappée Belle - antenne Sud ouest</h2>
+                <ul>
+                    <li>email: <a href="mailto:yo@jr.fr">yo@jr.fr</a></li>
+                    <li>téléphone: <a href="tel:0500000000">0500000000</a></li>
+                </ul>
+            </section>
+            <section class="contact">
+                <h1 class="person-name">Avi Rua</h1>
+                <h2 class="structure">L'Échappée Belle - antenne Nord est</h2>
+                <ul>
+                    <li>email: <a href="mailto:yo@jr.fr">yo@jr.fr</a></li>
+                    <li>téléphone: <a href="tel:0300000000">0300000000</a></li>
+                </ul>
+            </section>
+            <section class="contact">
+                <h1 class="person-name">Vid Uant</h1>
+                <h2 class="structure">L'Échappée Belle - antenne Nord ouest</h2>
+                <ul>
+                    <li>email: <a href="mailto:yo@jr.fr">yo@jr.fr</a></li>
+                    <li>téléphone: <a href="tel:0200000000">0200000000</a></li>
+                </ul>
+            </section>
+            <section class="contact">
+                <h1 class="person-name">Dvd Brnt</h1>
+                <h2 class="structure">L'Échappée Belle - antenne Sud est</h2>
+                <ul>
+                    <li>email: <a href="mailto:yo@jr.fr">yo@jr.fr</a></li>
+                    <li>téléphone: <a href="tel:0400000000">0400000000</a></li>
+                </ul>
+            </section>
+            <section class="contact">
+                <h1 class="person-name">Ai Ua</h1>
+                <h2 class="structure">L'Échappée Belle - antenne île-de-france</h2>
+                <ul>
+                    <li>email: <a href="mailto:yo@jr.fr">yo@jr.fr</a></li>
+                    <li>téléphone: <a href="tel:0100000000">0100000000</a></li>
+                </ul>
+            </section>
+            <section class="contact">
+                <h1 class="person-name">Al Mar</h1>
+                <h2 class="structure">IFJR - contact général</h2>
+                <ul>
+                    <li>email: <a href="mailto:yo@jr.fr">yo@ifjr.fr</a></li>
+                    <li>téléphone: <a href="tel:0600000000">0600000000</a></li>
+                </ul>
+            </section>
+        </output>
     </section>
 </section>
 
