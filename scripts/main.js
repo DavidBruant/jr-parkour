@@ -46,17 +46,17 @@ contactGéoSearchInput.addEventListener('input', debounce( ({target: {value}}) =
 			controller = undefined;
 
 			// if there is a number in value
-			const numberMatches = value.match(/\d+/);
-			const numberInValueAsString = numberMatches && numberMatches[0];
+			const departementMatches = value.match(/2[AB]/) || value.match(/\d+/);
+			const departementInValueAsString = departementMatches && departementMatches[0];
 			const name = value.match(/[A-Za-z]\D*[A-Za-z]/)[0]
 
 			// @ts-ignore
-			console.log('numberInValueAsString', numberInValueAsString, results.length)
+			console.log('numberInValueAsString', departementInValueAsString, results.length)
 
-			if(numberInValueAsString){
+			if(departementInValueAsString){
 				// find the single corresponding result
 				// @ts-ignore
-				results = results.filter( ({nom, departement: {code}}) => {console.log(name, nom, code, numberInValueAsString); return numberInValueAsString === code && name === nom } )
+				results = results.filter( ({nom, departement: {code}}) => departementInValueAsString === code && name === nom )
 			}
 
 			// @ts-ignore
