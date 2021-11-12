@@ -40,9 +40,10 @@ scripts:
         <p>
             Pour savoir vers qui vous tourner, vous pouvez saisir ici votre commune. 
             Nous vous donnerons les coordonnées de la personne la plus pertinente pour vous renseigner dans votre zone géographique
-        </p>
-        <input type="search" list="communes" placeholder="Pau">
-        <datalist id="communes"></datalist>
+        </p>    
+        <section class="search">
+            <input class="awesomplete" type="search" list="communes" placeholder="Pau">
+        </section>
         <h1>Tous les contacts</h1>
         <output>
             <section class="contact" data-departements="09,12,16,17,19,23,24,31,32,33,40,46,47,64,65,79,81,82,86,87">

@@ -1,104 +1,92 @@
 //@ts-check
 
-/*import App from './App.svelte';
-
-const app = new App({
-	target: document.querySelector('.svelte-main'),
-	props: {
-		name: 'from Svelte'
-	}
-});*/
-
-
-import debounce from "just-debounce-it";
 import {json} from "d3-fetch";
+import "awesomplete"
 
 const commencerDémarcheSection = document.querySelector('#commencer-démarche')
 
 const contactGéoSearchInput = commencerDémarcheSection.querySelector('input')
-const communeDatalist = commencerDémarcheSection.querySelector('datalist')
 
 const contactSections = commencerDémarcheSection.querySelectorAll('.contact[data-departements]')
 
-console.log('contactSections', contactSections)
 
-
-let controller;
-
+const communesP = json('https://geo.api.gouv.fr/communes?fields=nom,codeDepartement')
 // @ts-ignore
-contactGéoSearchInput.addEventListener('input', debounce( ({target: {value}}) => {
-	
-	for(const section of contactSections){
-		section.removeAttribute('hidden')
+.then(communes => {
+
+	const listCommunes = new Map(
+		// @ts-ignore
+		communes.map(
+			({nom, codeDepartement}) => [`${nom} (${codeDepartement})`, {nom, codeDepartement}]
+		)
+	)
+
+	// @ts-ignore
+	new Awesomplete(
+		contactGéoSearchInput, 
+		{
+			// @ts-ignore
+			list: [...listCommunes.keys()]
+		}
+	)
+
+	return listCommunes;
+})
+
+const onInput = ({target: {value}, type, text}) => {
+	if(type === 'awesomplete-select'){
+		value = text.value;
 	}
 
-	if(value.length >= 1){
 
-		if(controller){
-			console.log('abort!!')
-			controller.abort();
+	//const departementMatches = value.match(/2[AB]/) || value.match(/\d+/);
+	//const departementInValueAsString = departementMatches && departementMatches[0];
+	const nameMatch = value.match(/[A-Za-z]\D*[A-Za-z]/)
+	const name = nameMatch && nameMatch[0]
+
+	communesP.then(communes => {
+		let selectedCommune;
+
+		if(communes.has(value)){
+			selectedCommune = communes.get(value);
 		}
-		controller = new AbortController();
+		else{
+			const sameNameCommunes = [...communes.values()].filter( ({nom}) => nom === name )
 
-		json(`https://geo.api.gouv.fr/communes?nom=${value}&fields=departement&boost=population&limit=8`, {signal: controller.signal})
-		.then(results => {
-			console.log('results for', value, results)
-			controller = undefined;
-
-			// if there is a number in value
-			const departementMatches = value.match(/2[AB]/) || value.match(/\d+/);
-			const departementInValueAsString = departementMatches && departementMatches[0];
-			const name = value.match(/[A-Za-z]\D*[A-Za-z]/)[0]
-
-			// @ts-ignore
-			console.log('numberInValueAsString', departementInValueAsString, results.length)
-
-			if(departementInValueAsString){
-				// find the single corresponding result
-				// @ts-ignore
-				results = results.filter( ({nom, departement: {code}}) => departementInValueAsString === code && name === nom )
+			if(sameNameCommunes.length === 1){
+				selectedCommune = sameNameCommunes[0]
 			}
+		}
 
-			// @ts-ignore
-			if(results.length === 1){
-				const result = results[0];
-				console.log('result', result)
-				const departementCode = result.departement.code;
+		if(selectedCommune){
+			const departementCode = selectedCommune.codeDepartement;
 
-				for(const section of contactSections){
-					const deps = (section.getAttribute('data-departements') || '').split(',');
-					if(deps.length >=1){
-						if(deps.includes(departementCode)){
-							section.removeAttribute('hidden')
-						}
-						else{
-							section.setAttribute('hidden', 'hidden')
-						}
+			for(const section of contactSections){
+				const deps = (section.getAttribute('data-departements') || '').split(',');
+				if(deps.length >=1){
+					if(deps.includes(departementCode)){
+						section.removeAttribute('hidden')
 					}
 					else{
-						// do nothing; keep visible
+						section.setAttribute('hidden', 'hidden')
 					}
 				}
-
-			}
-			else{
-				communeDatalist.innerHTML = '';
-
-				// @ts-ignore
-				for(const {nom, departement: {code}} of results){
-					const option = document.createElement('option');
-					option.value = `${nom} (${code})`
-					option.textContent = `${nom} (${code})`
-
-					communeDatalist.append(option)
+				else{
+					// do nothing; keep visible
 				}
 			}
-		})
-		.catch(error => {
-			console.error('err', error)
-		})
-	}
-}, 300))
+		}
+		else{
+			for(const section of contactSections){
+				section.removeAttribute('hidden')
+			}
+		}
 
+	})
 
+}
 
+// @ts-ignore
+contactGéoSearchInput.addEventListener('input', onInput)
+// @ts-ignore
+contactGéoSearchInput.addEventListener('awesomplete-select', onInput)
